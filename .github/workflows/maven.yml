@@ -43,6 +43,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:    
     - uses: actions/checkout@v2
+    - uses: s4u/maven-settings-action@v2.2.0
+      with:
+        servers: |
+            [{
+                "id": "Repository",
+                "username": "${{ secrets.CLOUDHUB_USERNAME }}",
+                "password": "${{ secrets.CLOUDHUB_PASSWORD }}"
+            }]
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
@@ -54,8 +62,8 @@ jobs:
         name: artifacts
     - name: Deploy to CloudHub
       env:
-        USERNAME: ${{ secrets.cloudhub_username }}
-        PASSWORD: ${{ secrets.cloudhub_password }}
+        USERNAME: ${{ secrets.CLOUDHUB_USERNAME }}
+        PASSWORD: ${{ secrets.CLOUDHUB_PASSWORD }}
       run: |
         artifactName=$(ls *.jar | head -1)
         mvn mule:deploy -Dmule.artifact=$artifactName -Danypoint.userName="$USERNAME" -Danypoint.password="$PASSWORD"
