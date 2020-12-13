@@ -43,20 +43,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:    
     - uses: actions/checkout@v2
-    - uses: s4u/maven-settings-action@v2.2.0
-      with:
-        servers: |
-            [{
-                "id": "Repository",
-                "username": "${{ secrets.CLOUDHUB_USERNAME }}",
-                "password": "${{ secrets.CLOUDHUB_PASSWORD }}"
-            }]
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
         key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
         restore-keys: |
           ${{ runner.os }}-maven-
+    - name: maven-settings-xml-action
+      uses: whelk-io/maven-settings-xml-action@v14
+      with:
+         servers: |
+                  [{
+                      "id": "Repository",
+                      "username": "${{ secrets.CLOUDHUB_USERNAME }}",
+                      "password": "${{ secrets.CLOUDHUB_PASSWORD }}"
+                  }]
     - uses: actions/download-artifact@master
       with:
         name: artifacts
