@@ -31,6 +31,8 @@ jobs:
       with:
          plugin_groups: '[ "org.mule.tools"]'
          
+    - name: Clean with Maven
+      run: mvn clean
     - name: Build with Maven
       run: mvn -B package --file demo-mule-app/pom.xml
     - name: Stamp artifact file name with commit hash
