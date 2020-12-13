@@ -52,6 +52,7 @@ jobs:
     - name: maven-settings-xml-action
       uses: whelk-io/maven-settings-xml-action@v14
       with:
+         plugin_groups: '[ "org.mule.tools"]'
          servers: |
                   [{
                       "id": "Repository",
