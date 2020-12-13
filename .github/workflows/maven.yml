@@ -66,4 +66,4 @@ jobs:
         PASSWORD: ${{ secrets.CLOUDHUB_PASSWORD }}
       run: |
         artifactName=$(ls *.jar | head -1)
-        mvn mule:deploy -Dmule.artifact=$artifactName -Danypoint.userName="$USERNAME" -Danypoint.password="$PASSWORD"
+        mvn mule:deploy -Dmule.artifact=$artifactName -Danypoint.userName="$USERNAME" -Danypoint.password="$PASSWORD" -X
