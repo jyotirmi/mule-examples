@@ -30,12 +30,7 @@ jobs:
       uses: whelk-io/maven-settings-xml-action@v14
       with:
          plugin_groups: '[ "org.mule.tools"]'
-         servers: |
-                  [{
-                      "id": "Repository",
-                      "username": "${{ secrets.CLOUDHUB_USERNAME }}",
-                      "password": "${{ secrets.CLOUDHUB_PASSWORD }}"
-                  }]
+         
     - name: Build with Maven
       run: mvn -B package --file demo-mule-app/pom.xml
     - name: Stamp artifact file name with commit hash
@@ -57,12 +52,7 @@ jobs:
       uses: whelk-io/maven-settings-xml-action@v14
       with:
          plugin_groups: '[ "org.mule.tools"]'
-         servers: |
-                  [{
-                      "id": "Repository",
-                      "username": "${{ secrets.CLOUDHUB_USERNAME }}",
-                      "password": "${{ secrets.CLOUDHUB_PASSWORD }}"
-                  }]
+         
     - uses: actions/cache@v1
       with:
         path: ~/.m2/repository
